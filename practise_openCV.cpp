@@ -594,7 +594,7 @@ void init_rgba2rgb(Mat& input){
 }
 
 int main(){
-    string file_name = "birds_img.jpeg";    
+    string file_name = "demo_bird_img.jpeg";    
     Mat image = load_image(file_name); 
     int *array_info = (int*) malloc(sizeof(int) * 3);
     if (array_info == nullptr) {
@@ -635,7 +635,7 @@ int main(){
     //     drawContours(img_with_contours, contours, i, Scalar(0, 255, 0), 4); // 畫出綠色輪廓   
     // }
 
-    // drawContours(img_with_contours, contours, -1, Scalar(0, 255, 0), 4); // 畫出綠色輪廓   
+    drawContours(img_with_contours, contours, -1, Scalar(0, 255, 0), 4); // 畫出綠色輪廓   
     // cv::imshow("Image img_with_contours", img_with_contours);
     // cv::waitKey(0);    
 
@@ -668,9 +668,7 @@ int main(){
         int thickness = 2;
         putText(result, text, textPos, font, fontScale, textColor, thickness);
     }
-    
     printf("Total_Object =  %zu  detected\n",(contours.size()));
-
     Compare_View4(image, img_with_contours, mask_image, result);
     
 
