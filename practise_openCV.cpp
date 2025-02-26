@@ -594,7 +594,7 @@ void init_rgba2rgb(Mat& input){
 }
 
 int main(){
-    string file_name = "demo_bird_img.jpeg";    
+    string file_name = "birds_img.jpeg";    
     Mat image = load_image(file_name); 
     int *array_info = (int*) malloc(sizeof(int) * 3);
     if (array_info == nullptr) {
@@ -668,6 +668,8 @@ int main(){
         int thickness = 2;
         putText(result, text, textPos, font, fontScale, textColor, thickness);
     }
+    
+    printf("Total_Object =  %zu  detected\n",(contours.size()));
 
     Compare_View4(image, img_with_contours, mask_image, result);
     
