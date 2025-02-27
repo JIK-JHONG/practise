@@ -1,6 +1,6 @@
 Practising & training code / method / other ideas
 -
-**Machine Learning **
+**Machine Learning**
 
 | Bash name | Type | Description |
 |-------|-------|-------|
