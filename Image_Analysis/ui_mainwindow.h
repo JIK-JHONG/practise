@@ -159,10 +159,10 @@ public:
         screenton_gap->setAlignment(Qt::AlignmentFlag::AlignCenter);
         bwrev_btn = new QCheckBox(centralwidget);
         bwrev_btn->setObjectName("bwrev_btn");
-        bwrev_btn->setGeometry(QRect(790, 370, 151, 20));
+        bwrev_btn->setGeometry(QRect(790, 380, 151, 20));
         label_4 = new QLabel(centralwidget);
         label_4->setObjectName("label_4");
-        label_4->setGeometry(QRect(790, 400, 58, 16));
+        label_4->setGeometry(QRect(790, 410, 58, 16));
         QFont font3;
         font3.setPointSize(14);
         font3.setBold(true);
@@ -191,7 +191,7 @@ public:
         progressBar->setValue(24);
         label_5 = new QLabel(centralwidget);
         label_5->setObjectName("label_5");
-        label_5->setGeometry(QRect(790, 350, 121, 16));
+        label_5->setGeometry(QRect(790, 360, 121, 16));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
