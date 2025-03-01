@@ -1,4 +1,4 @@
-Image_Analysis with QT (網點產生器/與強度分析)
+Image_Analysis with QT (網點產生器/與強度分析（自動區分灰階強度）)
 -
 
 熟悉QT creator開發環境，與GUI概念（類似tkiner）；
