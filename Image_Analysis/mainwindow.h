@@ -11,7 +11,8 @@
 #include <QSlider>        // 包含 QSlider
 #include <QRadioButton>        // 包含 QRadioButton
 #include <QPushButton>        // 包含 QPushButton
-
+#include <QProgressBar>        // 包含 QProgressBar
+#include <opencv2/opencv.hpp>
 namespace Ui {
 class MainWindow;
 }
@@ -37,13 +38,14 @@ private slots:
     void onResultButtonClicked();   // 輸出選擇
     int getScreentoneGapValue();
     int getScreentoneSizeValue();
-    // int getOptionColorSet();
-    // void updateOptionColorSet();
+    int getOptionColorSet();
+    void updateOptionColorSet();
     int getbwrev_btnSet();
     void updateObwrev_btnSet();
 
     void setupRadioButtonGroup();
-
+    void updateProcessBar(int value);
+    void updateGraphicsView(QGraphicsView *view, cv::Mat &image);
 
 protected:
     void wheelEvent(QWheelEvent *event) override;  // 宣告 wheelEvent
@@ -53,10 +55,11 @@ private:
     void fitImageToView(QGraphicsPixmapItem *item, QGraphicsView *view);
     QLineEdit *filePathInfo;  // 宣告 QLabel 用來顯示檔案路徑
     QLabel *image_w_val, *image_h_val, *image_c_val,*screenton_gap,*screenton_size, *image_threshold_val;
-    QRadioButton *radioBtn_0, *radioBtn_1;
+    QRadioButton *radioBtn_0, *radioBtn_1, *radioBtn_2, *radioBtn_3;
     QSlider *Slider_screentone_gap, *Slider_screentone_size, *image_threshold;
     QCheckBox *option_check;
     QPushButton *result,*bwrev_btn;
+    QProgressBar *progressBar;
 
     // QLabel *image_w_val;
     // QLabel *image_h_val;

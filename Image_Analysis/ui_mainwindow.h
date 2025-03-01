@@ -17,6 +17,7 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
 #include <QtWidgets/QSlider>
@@ -54,6 +55,11 @@ public:
     QLabel *label_4;
     QSlider *image_threshold;
     QLabel *image_threshold_val;
+    QLabel *label_3;
+    QRadioButton *radioBtn_2;
+    QRadioButton *radioBtn_3;
+    QProgressBar *progressBar;
+    QLabel *label_5;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -61,28 +67,28 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(965, 600);
+        MainWindow->resize(970, 653);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         title_info = new QLabel(centralwidget);
         title_info->setObjectName("title_info");
-        title_info->setGeometry(QRect(20, 10, 71, 31));
+        title_info->setGeometry(QRect(20, 20, 71, 31));
         title_info->setAlignment(Qt::AlignmentFlag::AlignCenter);
         loadButton = new QPushButton(centralwidget);
         loadButton->setObjectName("loadButton");
-        loadButton->setGeometry(QRect(670, 0, 100, 51));
+        loadButton->setGeometry(QRect(670, 10, 100, 51));
         filePathInfo = new QLineEdit(centralwidget);
         filePathInfo->setObjectName("filePathInfo");
-        filePathInfo->setGeometry(QRect(140, 10, 521, 31));
+        filePathInfo->setGeometry(QRect(130, 20, 521, 31));
         QFont font;
         font.setItalic(true);
         filePathInfo->setFont(font);
         view1 = new QGraphicsView(centralwidget);
         view1->setObjectName("view1");
-        view1->setGeometry(QRect(20, 60, 371, 461));
+        view1->setGeometry(QRect(20, 80, 371, 461));
         view2 = new QGraphicsView(centralwidget);
         view2->setObjectName("view2");
-        view2->setGeometry(QRect(410, 60, 371, 461));
+        view2->setGeometry(QRect(400, 80, 371, 461));
         image_w = new QLabel(centralwidget);
         image_w->setObjectName("image_w");
         image_w->setGeometry(QRect(800, 10, 58, 16));
@@ -130,10 +136,10 @@ public:
         radioBtn_1->setGeometry(QRect(790, 110, 99, 20));
         result = new QPushButton(centralwidget);
         result->setObjectName("result");
-        result->setGeometry(QRect(790, 480, 161, 41));
+        result->setGeometry(QRect(790, 510, 161, 61));
         option_check = new QCheckBox(centralwidget);
         option_check->setObjectName("option_check");
-        option_check->setGeometry(QRect(790, 450, 151, 20));
+        option_check->setGeometry(QRect(790, 480, 151, 20));
         label_2 = new QLabel(centralwidget);
         label_2->setObjectName("label_2");
         label_2->setGeometry(QRect(800, 200, 58, 16));
@@ -153,27 +159,43 @@ public:
         screenton_gap->setAlignment(Qt::AlignmentFlag::AlignCenter);
         bwrev_btn = new QCheckBox(centralwidget);
         bwrev_btn->setObjectName("bwrev_btn");
-        bwrev_btn->setGeometry(QRect(790, 350, 151, 20));
+        bwrev_btn->setGeometry(QRect(790, 370, 151, 20));
         label_4 = new QLabel(centralwidget);
         label_4->setObjectName("label_4");
-        label_4->setGeometry(QRect(790, 380, 58, 16));
+        label_4->setGeometry(QRect(790, 400, 58, 16));
         QFont font3;
         font3.setPointSize(14);
         font3.setBold(true);
         label_4->setFont(font3);
         image_threshold = new QSlider(centralwidget);
         image_threshold->setObjectName("image_threshold");
-        image_threshold->setGeometry(QRect(790, 410, 111, 25));
+        image_threshold->setGeometry(QRect(790, 440, 111, 25));
         image_threshold->setOrientation(Qt::Orientation::Horizontal);
         image_threshold_val = new QLabel(centralwidget);
         image_threshold_val->setObjectName("image_threshold_val");
-        image_threshold_val->setGeometry(QRect(910, 410, 41, 20));
+        image_threshold_val->setGeometry(QRect(910, 440, 41, 20));
         image_threshold_val->setFont(font1);
         image_threshold_val->setAlignment(Qt::AlignmentFlag::AlignCenter);
+        label_3 = new QLabel(centralwidget);
+        label_3->setObjectName("label_3");
+        label_3->setGeometry(QRect(790, 260, 58, 16));
+        radioBtn_2 = new QRadioButton(centralwidget);
+        radioBtn_2->setObjectName("radioBtn_2");
+        radioBtn_2->setGeometry(QRect(790, 280, 99, 20));
+        radioBtn_3 = new QRadioButton(centralwidget);
+        radioBtn_3->setObjectName("radioBtn_3");
+        radioBtn_3->setGeometry(QRect(790, 310, 99, 20));
+        progressBar = new QProgressBar(centralwidget);
+        progressBar->setObjectName("progressBar");
+        progressBar->setGeometry(QRect(20, 550, 751, 23));
+        progressBar->setValue(24);
+        label_5 = new QLabel(centralwidget);
+        label_5->setObjectName("label_5");
+        label_5->setGeometry(QRect(790, 350, 121, 16));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 965, 43));
+        menubar->setGeometry(QRect(0, 0, 970, 43));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
@@ -206,6 +228,10 @@ public:
         bwrev_btn->setText(QCoreApplication::translate("MainWindow", "\350\207\252\345\213\225\351\273\221\347\231\275\345\217\215\350\275\211\346\216\247\345\210\266", nullptr));
         label_4->setText(QCoreApplication::translate("MainWindow", "\351\273\221\347\231\275\351\226\245\345\200\274", nullptr));
         image_threshold_val->setText(QCoreApplication::translate("MainWindow", "1", nullptr));
+        label_3->setText(QCoreApplication::translate("MainWindow", "\347\266\262\351\273\236\351\241\217\350\211\262", nullptr));
+        radioBtn_2->setText(QCoreApplication::translate("MainWindow", "\347\201\260\351\232\216", nullptr));
+        radioBtn_3->setText(QCoreApplication::translate("MainWindow", "\346\274\270\345\261\244", nullptr));
+        label_5->setText(QCoreApplication::translate("MainWindow", "\350\207\252\345\213\225\346\252\242\346\270\254\345\205\250\345\261\200", nullptr));
     } // retranslateUi
 
 };

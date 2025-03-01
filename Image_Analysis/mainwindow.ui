@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>965</width>
-    <height>600</height>
+    <width>970</width>
+    <height>653</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>10</y>
+      <y>20</y>
       <width>71</width>
       <height>31</height>
      </rect>
@@ -34,7 +34,7 @@
     <property name="geometry">
      <rect>
       <x>670</x>
-      <y>0</y>
+      <y>10</y>
       <width>100</width>
       <height>51</height>
      </rect>
@@ -46,8 +46,8 @@
    <widget class="QLineEdit" name="filePathInfo">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>10</y>
+      <x>130</x>
+      <y>20</y>
       <width>521</width>
       <height>31</height>
      </rect>
@@ -62,7 +62,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>60</y>
+      <y>80</y>
       <width>371</width>
       <height>461</height>
      </rect>
@@ -71,8 +71,8 @@
    <widget class="QGraphicsView" name="view2">
     <property name="geometry">
      <rect>
-      <x>410</x>
-      <y>60</y>
+      <x>400</x>
+      <y>80</y>
       <width>371</width>
       <height>461</height>
      </rect>
@@ -246,9 +246,9 @@
     <property name="geometry">
      <rect>
       <x>790</x>
-      <y>480</y>
+      <y>510</y>
       <width>161</width>
-      <height>41</height>
+      <height>61</height>
      </rect>
     </property>
     <property name="text">
@@ -259,7 +259,7 @@
     <property name="geometry">
      <rect>
       <x>790</x>
-      <y>450</y>
+      <y>480</y>
       <width>151</width>
       <height>20</height>
      </rect>
@@ -340,7 +340,7 @@
     <property name="geometry">
      <rect>
       <x>790</x>
-      <y>350</y>
+      <y>370</y>
       <width>151</width>
       <height>20</height>
      </rect>
@@ -353,7 +353,7 @@
     <property name="geometry">
      <rect>
       <x>790</x>
-      <y>380</y>
+      <y>400</y>
       <width>58</width>
       <height>16</height>
      </rect>
@@ -372,7 +372,7 @@
     <property name="geometry">
      <rect>
       <x>790</x>
-      <y>410</y>
+      <y>440</y>
       <width>111</width>
       <height>25</height>
      </rect>
@@ -385,7 +385,7 @@
     <property name="geometry">
      <rect>
       <x>910</x>
-      <y>410</y>
+      <y>440</y>
       <width>41</width>
       <height>20</height>
      </rect>
@@ -402,13 +402,78 @@
      <set>Qt::AlignmentFlag::AlignCenter</set>
     </property>
    </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>790</x>
+      <y>260</y>
+      <width>58</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>網點顏色</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioBtn_2">
+    <property name="geometry">
+     <rect>
+      <x>790</x>
+      <y>280</y>
+      <width>99</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>灰階</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioBtn_3">
+    <property name="geometry">
+     <rect>
+      <x>790</x>
+      <y>310</y>
+      <width>99</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>漸層</string>
+    </property>
+   </widget>
+   <widget class="QProgressBar" name="progressBar">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>550</y>
+      <width>751</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="value">
+     <number>24</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>790</x>
+      <y>350</y>
+      <width>121</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>自動檢測全局</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>965</width>
+     <width>970</width>
      <height>43</height>
     </rect>
    </property>

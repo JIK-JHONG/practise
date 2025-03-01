@@ -30,7 +30,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->image_threshold->setValue(80);  // 設定範圍：5 到 50
     ui->image_threshold_val->setText(QString::number(80));  // 設定範圍：5 到 50
 
-
+    ui->progressBar->setMinimum(0);  // 設定最小值
+    ui->progressBar->setMaximum(100); // 設定最大值
+    ui->progressBar->setValue(0);   // 設定當前值
 
     // // 初始化 QLabel 來顯示數值
     // screenton_gap = new QLabel("1", this);
@@ -43,8 +45,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->image_threshold, &QSlider::valueChanged, this, &MainWindow::updateImageValue);
 
     setupRadioButtonGroup();
-    // ui->radioBtn_0->setChecked(true);
-    // ui->radioBtn_2->setChecked(true);
+    ui->radioBtn_0->setChecked(true);
+    ui->radioBtn_2->setChecked(true);
     // 在 MainWindow 的構造函數中，假設你的按鈕名稱是 resultButton
     connect(ui->result, &QPushButton::clicked, this, &MainWindow::onResultButtonClicked);
     // 設定窗口標題
@@ -88,6 +90,7 @@ QImage cvMatToQImage(const Mat &mat) {
 
 
 void MainWindow::onResultButtonClicked() {
+
     int auto_check = getbwrev_btnSet() ;
     // 1. 取得原始影像，這應該是從 loadImagesFromFolder 中選擇的圖片
     QString filePath = ui->filePathInfo->text(); // 假設這是選擇的圖片路徑
@@ -138,37 +141,66 @@ void MainWindow::onResultButtonClicked() {
     }else if(getOptionSet() == 1){
         screentone_type = "square";
     }
-    // if (getOptionColorSet() == 0){
-    //     screentone_color = "grad";
-    //     copy_set = ImageBinary(copy_set, "Normal", 80);
-    // }else if(getOptionColorSet() == 1){
-    //     screentone_color = "std";
-    // }
-    screentone_color = "std";
+    if (getOptionColorSet() == 0){
+        screentone_color = "grad";
+        copy_set = ImageBinary(copy_set, "normal", 80);
+    }else if(getOptionColorSet() == 1){
+        screentone_color = "std";
+    }
+
     qDebug() << "screentone_color = " << screentone_color;  // 如果圖標找不到，輸出訊息
     cv::Mat copy_set_result = ImageComicMesh_Mix(copy_set, screentone_size, screentone_gap, screentone_type, screentone_color);
     // copy_set = ImageComicMesh_Mix(copy_set, 1, 1, "square", "std");
 
     // 5. 顯示處理後的影像到 view2
-    QImage qimg = cvMatToQImage(copy_set_result); // 假設你已經寫了這個函數來轉換 OpenCV 的 Mat 到 QImage
+
+    // QImage qimg = cvMatToQImage(copy_set_result); // 假設你已經寫了這個函數來轉換 OpenCV 的 Mat 到 QImage
 
     // 先清除現有的場景（如果已經有場景的話）
     ui->view2->setScene(nullptr);  // 移除原場景
+    updateGraphicsView(ui->view2, copy_set_result);
+    // // 創建 QGraphicsScene 和 QPixmap
+    // QGraphicsScene *scene = new QGraphicsScene(this);
+    // // QPixmap pixmap = QPixmap::fromImage(qimg); // 從 QImage 創建 QPixmap
 
-    // 創建 QGraphicsScene 和 QPixmap
-    QGraphicsScene *scene = new QGraphicsScene(this);
-    QPixmap pixmap = QPixmap::fromImage(qimg); // 從 QImage 創建 QPixmap
-    QGraphicsPixmapItem *item = new QGraphicsPixmapItem(pixmap); // 創建圖像項目
-    // 將圖像項目添加到場景
-    scene->addItem(item);
 
-    // 設定視圖場景
-    ui->view2->setScene(scene);
+    // // // 設置 QGraphicsView 的場景
+    // // ui->view1->setScene(scene1);
+    // // ui->view2->setScene(scene2);
 
-    // 使用原來的 fitImageToView 函數，將 QGraphicsPixmapItem 傳入
-    fitImageToView(item, ui->view2);  // 呼叫這個函數進行縮放
+    // // // 將 OpenCV 的 Mat 轉換為 QImage
+    // // QImage qimg(img.data, img.cols, img.rows, img.step, QImage::Format_BGR888);
 
-    ui->view2->update();  // 強制刷新視圖
+    // // // 將 QImage 轉換為 QPixmap
+    // // QPixmap pixmap = QPixmap::fromImage(qimg);
+
+    // // // 創建 QGraphicsPixmapItem 並設置圖片
+    // // QGraphicsPixmapItem *item1 = new QGraphicsPixmapItem(pixmap);
+    // // scene1->addItem(item1);
+
+    // // // 在 view2 中顯示灰階圖像
+    // // cv::Mat grayImg;
+    // // grayImg = ImageGray(img);
+
+
+
+    // QImage qimg(copy_set_result.data, copy_set_result.cols, copy_set_result.rows, copy_set_result.step, QImage::Format_BGR888);
+    // // 將 QImage 轉換為 QPixmap
+    // QPixmap pixmap = QPixmap::fromImage(qimg);
+    // QGraphicsPixmapItem *item = new QGraphicsPixmapItem(pixmap); // 創建圖像項目
+
+
+
+    // // 將圖像項目添加到場景
+    // scene->addItem(item);
+
+    // // 設定視圖場景
+    // ui->view2->setScene(scene);
+
+    // // 使用原來的 fitImageToView 函數，將 QGraphicsPixmapItem 傳入
+    // fitImageToView(item, ui->view2);  // 呼叫這個函數進行縮放
+
+    // ui->view2->update();  // 強制刷新視圖
     // 更新視圖範圍
 
     // 6. 檢查是否需要儲存圖檔
@@ -201,49 +233,50 @@ void MainWindow::onResultButtonClicked() {
             QMessageBox::warning(this, "儲存失敗", "無法儲存圖像到：" + finalSavePath);
         }
     }
+
 }
 // 在建構子或初始化函式中設置
 void MainWindow::setupRadioButtonGroup()
 {
     // 創建 QButtonGroup 物件
     QButtonGroup* group1 = new QButtonGroup(this);
-    // QButtonGroup* group2 = new QButtonGroup(this);
+    QButtonGroup* group2 = new QButtonGroup(this);
 
     // 把 radio buttons 添加到對應的 QButtonGroup 中
     group1->addButton(ui->radioBtn_0);
     group1->addButton(ui->radioBtn_1);
 
-    // group2->addButton(ui->radioBtn_2);
-    // group2->addButton(ui->radioBtn_3);
+    group2->addButton(ui->radioBtn_2);
+    group2->addButton(ui->radioBtn_3);
 
     // 設定第一組預設選中 radioBtn_0
     ui->radioBtn_0->setChecked(true);
 
     // 設定第二組預設選中 radioBtn_2
-    // ui->radioBtn_3->setChecked(true);
+    ui->radioBtn_3->setChecked(true);
 }
 
 
-// // 根據 radioBtn_2 和 radioBtn_3 的選擇狀態返回對應的選項
-// int MainWindow::getOptionColorSet() {
-//     // if (ui->radioBtn_2->isChecked()) {
-//     //     qDebug() << "Radio button 2 is selected!";
-//     //     return 0; // 如果 radioBtn_2 被選中，回傳 0
-//     // } else if (ui->radioBtn_3->isChecked()) {
-//     //     qDebug() << "Radio button 3 is selected!";
-//     //     return 1; // 如果 radioBtn_3 被選中，回傳 1
-//     // }
-//     return 1; // 若兩者都未選中，回傳 -1
-// }
+// 根據 radioBtn_2 和 radioBtn_3 的選擇狀態返回對應的選項
+int MainWindow::getOptionColorSet() {
+    if (ui->radioBtn_2->isChecked()) {
+        qDebug() << "Radio button 2 is selected!";
+        return 1; // 如果 radioBtn_2 被選中，回傳 0
+    } else if (ui->radioBtn_3->isChecked()) {
+        qDebug() << "Radio button 3 is selected!";
+        return 0; // 如果 radioBtn_3 被選中，回傳 1
+    }
+    return -1; // 若兩者都未選中，回傳 -1
+}
 
-// // 更新 radioBtn_2 和 radioBtn_3 的選擇狀態
-// void MainWindow::updateOptionColorSet() {
-//     // if (ui->radioBtn_2->isChecked()) {
-//     //     qDebug() << "Radio button 2 is selected!";
-//     // } else if (ui->radioBtn_3->isChecked()) {
-//     //     qDebug() << "Radio button 3 is selected!";
-//     // }
-// }
+// 更新 radioBtn_2 和 radioBtn_3 的選擇狀態
+void MainWindow::updateOptionColorSet() {
+    if (ui->radioBtn_2->isChecked()) {
+        qDebug() << "Radio button 2 is selected!";
+    } else if (ui->radioBtn_3->isChecked()) {
+        qDebug() << "Radio button 3 is selected!";
+    }
+}
 
 // 根據 radioBtn_0 和 radioBtn_1 的選擇狀態返回對應的選項
 int MainWindow::getOptionSet() {
@@ -315,62 +348,97 @@ int MainWindow::getImageValue() {
 }
 void MainWindow::updateImageValue(int value)
 {
-    ui->image_threshold_val->setText(QString::number(value));  // 使用 setText 更新 QLabel
-    qDebug() << "image_threshold_val = " <<QString::number(value);
-    ui->view2->setScene(nullptr);
+
+    ui->image_threshold_val->setText(QString::number(value));  // 更新 QLabel 顯示數值
+    qDebug() << "image_threshold_val = " << value;
 
     QString filePath = ui->filePathInfo->text();
-    // 使用 OpenCV 加載圖像
-    cv::Mat img = cv::imread(filePath.toStdString(), cv::IMREAD_COLOR);
-    // 創建場景
-    QGraphicsScene *scene2 = new QGraphicsScene(this);
-    // 設置 QGraphicsView 的場景
-
-    ui->view2->setScene(scene2);
-    // 在 view2 中顯示灰階圖像
-    cv::Mat grayImg;
-    cv::cvtColor(img, grayImg, cv::COLOR_BGR2GRAY);  // 轉換為灰階
-
-    int image_threshold = getImageValue();
-    int auto_check = getbwrev_btnSet() ;
-    qDebug() << "auto_check = refresh >>>> " << auto_check;
-    if (auto_check == 1){
-        int image_check = image_binary_color_check(grayImg, image_threshold);
-        if (image_check == 1)
-        {
-            grayImg = ImageBinary(grayImg, "normal", image_threshold);
-        }
-        else
-        {
-            grayImg = ImageBinary(grayImg, "inverted", image_threshold);
-        }
-    }else{
-        // if (getOptionColorSet() == 0){
-        grayImg = ImageBinary(grayImg, "normal", image_threshold);
-        // }
+    if (filePath.isEmpty()) {
+        qDebug() << "Error: File path is empty!";
+        return;
     }
 
+    // 使用 OpenCV 加載圖像
+    cv::Mat img = cv::imread(filePath.toStdString(), cv::IMREAD_COLOR);
+    if (img.empty()) {
+        qDebug() << "Error: Failed to load image!";
+        return;
+    }
 
-    // 將灰階圖像轉換為 QImage
-    QImage grayQimg(grayImg.data, grayImg.cols, grayImg.rows, grayImg.step, QImage::Format_Grayscale8);
+    // 轉換為灰階
+    cv::Mat grayImg = ImageGray(img);
+
+    int image_threshold = getImageValue();
+    int auto_check = getbwrev_btnSet();
+    qDebug() << "auto_check = refresh >>>> " << auto_check;
+
+    if (auto_check == 1) {
+        int image_check = image_binary_color_check(grayImg, image_threshold);
+        if (image_check == 1) {
+            grayImg = ImageBinary(grayImg, "normal", image_threshold);
+        } else {
+            grayImg = ImageBinary(grayImg, "inverted", image_threshold);
+        }
+    } else {
+        grayImg = ImageBinary(grayImg, "normal", image_threshold);
+    }
+
+    // 清除舊場景（防止記憶體洩漏）
+    if (ui->view2->scene()) {
+        delete ui->view2->scene();
+    }
+
+    // 建立新的場景
+    // QGraphicsScene *scene = new QGraphicsScene(this);
+
+    // // OpenCV BGR to RGB 轉換（避免顏色錯誤）
+    // cv::cvtColor(grayImg, grayImg, cv::COLOR_BGR2RGB);
+
+    // // 將 OpenCV Mat 轉為 QImage
+    // QImage qimg(grayImg.data, grayImg.cols, grayImg.rows, grayImg.step, QImage::Format_RGB888);
+
+    // // 將 QImage 轉換為 QPixmap
+    // QPixmap pixmap = QPixmap::fromImage(qimg);
+    // QGraphicsPixmapItem *item2 = new QGraphicsPixmapItem(pixmap);
+
+    // // 添加圖像到場景
+    // scene->addItem(item2);
+    // ui->view2->setScene(scene);
+
+    // // 確保影像適應 QGraphicsView
+    // fitImageToView(item2, ui->view2);
+    // ui->view2->setSceneRect(scene->itemsBoundingRect());
+    updateGraphicsView(ui->view2, grayImg);
+}
+void MainWindow::updateGraphicsView(QGraphicsView *view, cv::Mat &image) {
+    // 建立新的場景
+    QGraphicsScene *scene = new QGraphicsScene(this);
+
+    // OpenCV BGR to RGB 轉換（避免顏色錯誤）
+    cv::cvtColor(image, image, cv::COLOR_BGR2RGB);
+
+    // 將 OpenCV Mat 轉為 QImage
+    QImage qimg(image.data, image.cols, image.rows, image.step, QImage::Format_RGB888);
 
     // 將 QImage 轉換為 QPixmap
-    QPixmap grayPixmap = QPixmap::fromImage(grayQimg);
+    QPixmap pixmap = QPixmap::fromImage(qimg);
+    QGraphicsPixmapItem *item = new QGraphicsPixmapItem(pixmap);
 
-    // 創建 QGraphicsPixmapItem 並設置灰階圖像
-    QGraphicsPixmapItem *item2 = new QGraphicsPixmapItem(grayPixmap);
-    scene2->addItem(item2);
+    // 添加圖像到場景
+    scene->addItem(item);
+    view->setScene(scene);
 
-    // 設置初始縮放比例：使圖片適合視圖大小
-    fitImageToView(item2, ui->view2);
-
-    // 更新視圖範圍
-    ui->view2->setSceneRect(scene2->itemsBoundingRect());
-
-
-
+    // 確保影像適應 QGraphicsView
+    fitImageToView(item, view);
+    view->setSceneRect(scene->itemsBoundingRect());
 }
 
+void MainWindow::updateProcessBar(int value){
+    value = qBound(0, value, 100);  // 限制數值範圍
+    // qDebug() << "updateProcessBar" << value;
+    qDebug() << "updateProcessBar(" << value << ") executed, actual progressBar value:" << ui->progressBar->value();
+    ui->progressBar->setValue(value);
+}
 // 更新 Gap 值
 int MainWindow::getScreentoneGapValue() {
     return ui->Slider_screentone_gap->value(); // 正確取得並返回數值
@@ -484,8 +552,10 @@ void MainWindow::loadImagesFromFolder()
         scene1->addItem(item1);
 
         // 在 view2 中顯示灰階圖像
+
         cv::Mat grayImg;
-        cv::cvtColor(img, grayImg, cv::COLOR_BGR2GRAY);  // 轉換為灰階
+        grayImg = ImageGray(img);
+        // cv::cvtColor(img, grayImg, cv::COLOR_BGR2GRAY);  // 轉換為灰階
 
         int image_threshold = getImageValue();
         int auto_check = getbwrev_btnSet() ;
@@ -508,7 +578,7 @@ void MainWindow::loadImagesFromFolder()
 
 
         // 將灰階圖像轉換為 QImage
-        QImage grayQimg(grayImg.data, grayImg.cols, grayImg.rows, grayImg.step, QImage::Format_Grayscale8);
+        QImage grayQimg(grayImg.data, grayImg.cols, grayImg.rows, grayImg.step, QImage::Format_BGR888);
 
         // 將 QImage 轉換為 QPixmap
         QPixmap grayPixmap = QPixmap::fromImage(grayQimg);
@@ -522,6 +592,7 @@ void MainWindow::loadImagesFromFolder()
         fitImageToView(item2, ui->view2);
 
         // 更新視圖範圍
+
         ui->view1->setSceneRect(scene1->itemsBoundingRect());
         ui->view2->setSceneRect(scene2->itemsBoundingRect());
     }
