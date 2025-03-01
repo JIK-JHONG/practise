@@ -11,5 +11,5 @@ Image_Analysis with QT (網點產生器/與強度分析)
 4. 建立 icon (不確定是MacOS還是沒設定好，都沒有設定成功)
 5. 熟悉  mainwindow.cpp / mainwindow.h / mainwindow.ui 作用。
 
-![介面](https://github.com/JIK-JHONG/Notes/blob/main/Image_Analysis/demo.jpeg)
+![介面](https://github.com/JIK-JHONG/practise/blob/main/Image_Analysis/demo.jpeg)
 
