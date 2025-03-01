@@ -167,7 +167,7 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        title_info->setText(QCoreApplication::translate("MainWindow", "\346\270\254\350\251\246\346\250\231\347\261\2441", nullptr));
+        title_info->setText(QCoreApplication::translate("MainWindow", "\346\252\224\346\241\210\350\267\257\345\276\221", nullptr));
         loadButton->setText(QCoreApplication::translate("MainWindow", "\351\201\270\346\223\207\346\252\224\346\241\210", nullptr));
         image_w->setText(QCoreApplication::translate("MainWindow", "Width", nullptr));
         image_h->setText(QCoreApplication::translate("MainWindow", "Height", nullptr));
