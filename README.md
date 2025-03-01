@@ -11,4 +11,11 @@ Practising & training code / method / other ideas
 | [practise_openCV](https://github.com/JIK-JHONG/practise/tree/main/practise_openCV.cpp) | OpenCV+C++ | Practising + Experimental algorithm of OpenCV |
 
 
+**QT**
+
+| Bash name | Type | Description |
+|-------|-------|-------|
+| [QT_Image_Analysis](https://github.com/JIK-JHONG/practise/tree/main/Image_Analysis) | C++ / QT | screentone creator  |
+
+
 1. LinkedList.c - understanding / testing the structure in Memory control.
