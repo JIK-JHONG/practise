@@ -17,14 +17,17 @@
    <widget class="QLabel" name="title_info">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>20</x>
       <y>10</y>
-      <width>121</width>
+      <width>71</width>
       <height>31</height>
      </rect>
     </property>
     <property name="text">
      <string>檔案路徑</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignmentFlag::AlignCenter</set>
     </property>
    </widget>
    <widget class="QPushButton" name="loadButton">
@@ -33,7 +36,7 @@
       <x>670</x>
       <y>0</y>
       <width>100</width>
-      <height>41</height>
+      <height>51</height>
      </rect>
     </property>
     <property name="text">
@@ -48,6 +51,11 @@
       <width>521</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <italic>true</italic>
+     </font>
     </property>
    </widget>
    <widget class="QGraphicsView" name="view1">
@@ -81,6 +89,9 @@
     </property>
     <property name="text">
      <string>Width</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
     </property>
    </widget>
    <widget class="QLabel" name="image_h">
@@ -126,6 +137,9 @@
     <property name="text">
      <string>-</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignmentFlag::AlignCenter</set>
+    </property>
    </widget>
    <widget class="QLabel" name="image_h_val">
     <property name="geometry">
@@ -143,6 +157,9 @@
     </property>
     <property name="text">
      <string>-</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignmentFlag::AlignCenter</set>
     </property>
    </widget>
    <widget class="QLabel" name="image_c_val">
@@ -162,6 +179,9 @@
     <property name="text">
      <string>-</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignmentFlag::AlignCenter</set>
+    </property>
    </widget>
    <widget class="QSlider" name="Slider_screentone_size">
     <property name="geometry">
@@ -179,11 +199,18 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>800</x>
+      <x>790</x>
       <y>140</y>
       <width>58</width>
       <height>16</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <bold>true</bold>
+      <underline>false</underline>
+     </font>
     </property>
     <property name="text">
      <string>網點大小</string>
@@ -238,7 +265,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>輸出檔案 jpeg</string>
+     <string>輸出檔案</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
@@ -284,6 +311,9 @@
     <property name="text">
      <string>1</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignmentFlag::AlignCenter</set>
+    </property>
    </widget>
    <widget class="QLabel" name="screenton_gap">
     <property name="geometry">
@@ -302,12 +332,15 @@
     <property name="text">
      <string>1</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignmentFlag::AlignCenter</set>
+    </property>
    </widget>
    <widget class="QCheckBox" name="bwrev_btn">
     <property name="geometry">
      <rect>
       <x>790</x>
-      <y>370</y>
+      <y>350</y>
       <width>151</width>
       <height>20</height>
      </rect>
@@ -319,11 +352,17 @@
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>800</x>
-      <y>400</y>
+      <x>790</x>
+      <y>380</y>
       <width>58</width>
       <height>16</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <bold>true</bold>
+     </font>
     </property>
     <property name="text">
      <string>黑白閥值</string>
@@ -333,7 +372,7 @@
     <property name="geometry">
      <rect>
       <x>790</x>
-      <y>420</y>
+      <y>410</y>
       <width>111</width>
       <height>25</height>
      </rect>
@@ -346,7 +385,7 @@
     <property name="geometry">
      <rect>
       <x>910</x>
-      <y>420</y>
+      <y>410</y>
       <width>41</width>
       <height>20</height>
      </rect>
@@ -358,6 +397,9 @@
     </property>
     <property name="text">
      <string>1</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignmentFlag::AlignCenter</set>
     </property>
    </widget>
   </widget>
