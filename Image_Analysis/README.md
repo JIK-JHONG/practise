@@ -1,6 +1,22 @@
 Image_Analysis with QT (網點產生器/與強度分析（自動區分灰階強度）)
 -
 
+# 編譯與執行
+
+Complie
+-
+
+qmake Image_Analysis.pro -o Makefile
+
+make
+
+Run
+-
+
+./Image_Analysis.app/Contents/MacOS/Image_Analysis
+
+
+
 # v1.1 2025.03.01 更新
 
 1. 修改部分介面與調整(QGraphicView的設定、輸出圖的原始用cv::COLOR_BGR2GRAY會有問題，改為自己的Image_Gray，輸出為RGB通道的灰階）。
